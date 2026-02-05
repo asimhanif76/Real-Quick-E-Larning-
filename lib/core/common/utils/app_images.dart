@@ -37,11 +37,16 @@ class AppImages {
   static String aiscan = '${imagesPath}aiscan.svg';
   static String edit = '${imagesPath}Edit.svg';
   static String edit_1 = '${imagesPath}edit_1.svg';
+  static String edit_2 = '${imagesPath}edit_2.svg';
   static String profile_edit = '${imagesPath}profile_edit.svg';
   static String upgrade_plan = '${imagesPath}upgrade_plan.svg';
   static String Change_password = '${imagesPath}Change_password.svg';
   static String history = '${imagesPath}history.svg';
   static String backButton = '${imagesPath}back_button.svg';
+  static String audio = '${imagesPath}audio.svg';
+  static String video = '${imagesPath}video.svg';
+  static String caption = '${imagesPath}caption.svg';
+  static String checkBox = '${imagesPath}checkBox.svg';
   // static String gptRebout = '${imagesPath}gptRebout.png';
   // static String healthBar = '${imagesPath}healthBar.png';
   // static String vagitable = '${imagesPath}vagitable.png';

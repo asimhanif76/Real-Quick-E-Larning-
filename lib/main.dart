@@ -1,4 +1,5 @@
 import 'package:e_learning/Routes/app_routes.dart';
+import 'package:e_learning/View/VideoExport/video_export.dart';
 import 'package:e_learning/core/common/app_keys.dart';
 import 'package:e_learning/core/common/utils/Themes/app_themes.dart';
 import 'package:flutter/material.dart';
@@ -17,13 +18,14 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return ResponsiveSizer(
       builder: (context, orientation, screenType) {
-        return GetMaterialApp(
+        return MaterialApp(
           debugShowCheckedModeBanner: false,
           title: 'E-Learning',
           theme: AppThemes.lightTheme,
           scaffoldMessengerKey: scaffoldMessengerKey,
-          routes: AppRoutes.routes,
-          initialRoute: AppRoutes.splashScreen,
+          // routes: AppRoutes.routes,
+          // initialRoute: AppRoutes.splashScreen,
+          home: VideoExport(),
         );
       },
     );
