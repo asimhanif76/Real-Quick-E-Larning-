@@ -10,6 +10,7 @@ class MainCustomButton extends StatelessWidget {
   final String title;
   final VoidCallback onTap;
   final Color? col;
+  final Color? borderCol;
   final Color? textColor;
   final Color? backColour;
   final bool? loading;
@@ -24,6 +25,7 @@ class MainCustomButton extends StatelessWidget {
     this.textColor = AppColors.white,
     this.loading = false,
     this.backColour = AppColors.primaryColor,
+    this.borderCol = AppColors.primaryColor,
     this.width,
     this.height = 6,
   });
@@ -38,9 +40,11 @@ class MainCustomButton extends StatelessWidget {
           elevation: 0,
           shadowColor: AppColors.lightGray,
           backgroundColor: backColour,
+
           minimumSize: Size(double.infinity, 7.h),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(35),
+            side: BorderSide(color: borderCol!),
           ),
         ),
         child: loading == true

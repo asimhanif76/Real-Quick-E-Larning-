@@ -3,7 +3,6 @@ import 'package:e_learning/core/Extension/extension.dart';
 import 'package:e_learning/core/common/app_text.dart';
 import 'package:e_learning/core/common/utils/Themes/app_color.dart';
 import 'package:e_learning/core/common/utils/app_images.dart';
-import 'package:e_learning/core/common/utils/text_field_custam.dart';
 import 'package:e_learning/core/common/widgets/custamContainer.dart';
 import 'package:e_learning/core/common/widgets/custom_Button.dart';
 import 'package:e_learning/core/common/widgets/glass_container.dart';
@@ -109,7 +108,6 @@ class VideoExport extends StatelessWidget {
             title:
                 'All selected assets will be compiled into a single SCORM package.',
             fontSize: 16,
-            fontWeight: FontWeight.w600,
           ),
           1.h.height,
           _assetRow(AppImages.video, 'Video'),
@@ -142,7 +140,6 @@ class VideoExport extends StatelessWidget {
           const CustomTextWidget(
             title: 'Select learning standard',
             fontSize: 16,
-            fontWeight: FontWeight.w600,
           ),
           GridView.builder(
             padding: EdgeInsets.all(0),
@@ -203,84 +200,178 @@ class VideoExport extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const CustomTextWidget(
-            title: 'Select email',
-            fontSize: 16,
-            fontWeight: FontWeight.w600,
-          ),
+          const CustomTextWidget(title: 'Select email', fontSize: 16),
           1.5.h.height,
           Row(
             children: [
               SvgPicture.asset(AppImages.checkBox),
+
               3.w.width,
-              const CustomTextWidget(
-                title: 'Dawoodexample@gmail.com',
-                fontSize: 16,
+              Obx(
+                () => CustomTextWidget(
+                  title: controller.emailList[0],
+                  fontSize: 16,
+                ),
               ),
             ],
           ),
           2.h.height,
           InkWell(
             onTap: () {
-              showDialog(
+              showModalBottomSheet(
                 context: context,
+                isScrollControlled: true, // 🔥 important
+                backgroundColor: Colors.transparent,
                 builder: (context) {
-                  return Center(
-                    child: Material(
-                      color: Colors.transparent,
-                      child: Container(
-                        height: 30.h,
-                        width: 100.w,
-                        decoration: BoxDecoration(
-                          color: Colors.amberAccent,
-                          borderRadius: BorderRadius.circular(5.w),
-                        ),
-                        child: Padding(
-                          padding: EdgeInsets.all(6.w),
-                          child: Column(
-                            children: [
-                              Row(
+                  return Padding(
+                    padding: MediaQuery.of(context).viewInsets,
+                    child: SingleChildScrollView(
+                      child: Center(
+                        child: Material(
+                          color: Colors.transparent,
+                          child: GlassContainer(
+                            // width: 100.w,
+                            // decoration: BoxDecoration(
+                            //   color: AppColors.backgroundColor.withOpacity(0.9),
+                            //   borderRadius: BorderRadius.circular(5.w),
+                            // ),
+                            color: Colors.white.withOpacity(0.4),
+                            borderRadius: 4.w,
+                            child: Padding(
+                              padding: EdgeInsets.all(6.w),
+                              child: Column(
+                                mainAxisSize: MainAxisSize.min,
                                 children: [
-                                  Icon(
-                                    Icons.info_outline,
-                                    color: AppColors.primaryColor,
+                                  1.h.height,
+                                  Row(
+                                    children: [
+                                      Icon(
+                                        Icons.info_outline,
+                                        color: AppColors.primaryColor,
+                                      ),
+                                      2.w.width,
+                                      CustomTextWidget(
+                                        title: 'You can add maximum 5 emails',
+                                        color: Colors.black45,
+                                        fontSize: 16,
+                                      ),
+                                    ],
                                   ),
-                                  2.w.width,
-                                  CustomTextWidget(
-                                    title: 'You can add maximum 5 emails',
-                                    fontSize: 16,
+                                  2.h.height,
+                                  ListView.builder(
+                                    padding: EdgeInsets.all(0),
+                                    shrinkWrap: true,
+                                    itemCount: controller.emailList.length,
+                                    itemBuilder: (context, index) {
+                                      return Padding(
+                                        padding: EdgeInsets.symmetric(
+                                          vertical: 0.5.h,
+                                        ),
+                                        child: Row(
+                                          children: [
+                                            Obx(
+                                              () => InkWell(
+                                                onTap: () => controller
+                                                    .toggleEmail(index),
+                                                child: SvgPicture.asset(
+                                                  controller.selectedEmails
+                                                          .contains(index)
+                                                      ? AppImages.checkBox
+                                                      : AppImages
+                                                            .empty_Checkbox,
+                                                ),
+                                              ),
+                                            ),
+                                            3.w.width,
+                                            CustomTextWidget(
+                                              title:
+                                                  controller.emailList[index],
+                                              color: Colors.black45,
+                                              fontSize: 16,
+                                            ),
+                                          ],
+                                        ),
+                                      );
+                                    },
+                                  ),
+                                  2.h.height,
+                                  TextField(
+                                    autofocus: true,
+                                    controller: controller.emailController,
+                                    cursorColor: AppColors.primaryColor,
+                                    decoration: InputDecoration(
+                                      hintText: 'write email',
+                                      hintStyle: TextStyle(
+                                        color: Colors.black,
+                                        fontSize: 16,
+                                      ),
+                                      enabledBorder: UnderlineInputBorder(
+                                        borderSide: BorderSide(
+                                          color: Colors.grey,
+                                          width: 1,
+                                        ), // bottom border
+                                      ),
+                                      focusedBorder: UnderlineInputBorder(
+                                        borderSide: BorderSide(
+                                          color: AppColors.primaryColor,
+                                          width: 2,
+                                        ), // bottom border when focused
+                                      ),
+                                      fillColor: Colors.transparent,
+                                      contentPadding: EdgeInsets.only(top: 1.h),
+                                      suffixIconConstraints:
+                                          const BoxConstraints(
+                                            minHeight: 24,
+                                            minWidth: 24,
+                                          ),
+                                    ),
+                                  ),
+                                  5.h.height,
+                                  Row(
+                                    children: [
+                                      Expanded(
+                                        flex: 2,
+                                        child: MainCustomButton(
+                                          title: 'Cancel',
+                                          backColour: Colors.transparent,
+                                          textColor: Colors.grey,
+                                          borderCol: Colors.grey,
+                                          onTap: () {
+                                            Navigator.pop(context);
+                                          },
+                                        ),
+                                      ),
+                                      5.w.width,
+                                      Expanded(
+                                        flex: 3,
+                                        child: MainCustomButton(
+                                          title: 'Confirm',
+                                          onTap: () {
+                                            if (controller
+                                                    .emailController
+                                                    .text
+                                                    .isNotEmpty &&
+                                                controller.emailList.length <
+                                                    5) {
+                                              controller.emailList.add(
+                                                controller.emailController.text,
+                                              );
+                                              controller.emailController
+                                                  .clear();
+                                              Navigator.pop(context);
+                                            } else {
+                                              controller.emailController
+                                                  .clear();
+                                              Navigator.pop(context);
+                                            }
+                                          },
+                                        ),
+                                      ),
+                                    ],
                                   ),
                                 ],
                               ),
-                              TextField(
-                                cursorColor: AppColors.primaryColor,
-                                decoration: InputDecoration(
-                                  hintText: 'write email',
-                                  hintStyle: TextStyle(
-                                    color: Colors.black,
-                                    fontSize: 16,
-                                  ),
-                                  enabledBorder: UnderlineInputBorder(
-                                    borderSide: BorderSide(
-                                      color: Colors.grey,
-                                      width: 1,
-                                    ), // bottom border
-                                  ),
-                                  focusedBorder: UnderlineInputBorder(
-                                    borderSide: BorderSide(
-                                      color: AppColors.primaryColor,
-                                      width: 2,
-                                    ), // bottom border when focused
-                                  ),
-                                  fillColor: Colors.transparent,
-                                  contentPadding: EdgeInsets.only(top: 1.h),
-                                  suffixIconConstraints: const BoxConstraints(
-                                    minHeight: 24,
-                                    minWidth: 24,
-                                  ),
-                                ),
-                              ),
-                            ],
+                            ),
                           ),
                         ),
                       ),
@@ -290,7 +381,17 @@ class VideoExport extends StatelessWidget {
               );
             },
             child: Center(
-              child: const CustomTextWidget(title: '+ Add email', fontSize: 16),
+              child: Obx(
+                () => CustomTextWidget(
+                  title: controller.emailList.length > 1
+                      ? '+ ${controller.emailList.length - 1} more email'
+                      : '+ Add email',
+                  color: controller.emailList.length > 1
+                      ? AppColors.primaryColor
+                      : Colors.black,
+                  fontSize: 16,
+                ),
+              ),
             ),
           ),
         ],

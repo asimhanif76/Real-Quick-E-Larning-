@@ -36,12 +36,14 @@ class GlassContainer extends StatelessWidget {
   final double? borderRadius;
   final Widget child;
   final bool? showBorder;
+  final Color? color;
 
   const GlassContainer({
     super.key,
     this.borderRadius = 25,
     required this.child,
     this.showBorder = true,
+    this.color = Colors.white12,
   });
 
   @override
@@ -56,11 +58,11 @@ class GlassContainer extends StatelessWidget {
               )
             : null,
       ),
-      
+
       child: LiquidGlassLayer(
         settings: const LiquidGlassSettings(thickness: 15, blur: 2),
         child: LiquidGlass.withOwnLayer(
-          settings: const LiquidGlassSettings(
+          settings: LiquidGlassSettings(
             thickness: 20,
             blur: 1.2,
             ambientStrength: 0,
@@ -69,7 +71,7 @@ class GlassContainer extends StatelessWidget {
             visibility: 2,
             refractiveIndex: 1.2,
             lightAngle: 5,
-            glassColor: Colors.white12,
+            glassColor: color!,
           ),
           shape: LiquidRoundedSuperellipse(borderRadius: borderRadius!),
           child: child,
