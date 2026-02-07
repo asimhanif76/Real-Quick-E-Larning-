@@ -48,6 +48,7 @@ class AppImages {
   static String caption = '${imagesPath}caption.svg';
   static String checkBox = '${imagesPath}checkBox.svg';
   static String empty_Checkbox = '${imagesPath}empty_Checkbox.svg';
+  static String tick = '${imagesPath}tick.svg';
   // static String gptRebout = '${imagesPath}gptRebout.png';
   // static String healthBar = '${imagesPath}healthBar.png';
   // static String vagitable = '${imagesPath}vagitable.png';

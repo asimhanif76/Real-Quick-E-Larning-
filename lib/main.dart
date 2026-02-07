@@ -1,4 +1,5 @@
 import 'package:e_learning/Routes/app_routes.dart';
+import 'package:e_learning/View/VideoCaptions/video_caption.dart';
 import 'package:e_learning/View/VideoExport/video_export.dart';
 import 'package:e_learning/core/common/app_keys.dart';
 import 'package:e_learning/core/common/utils/Themes/app_themes.dart';
@@ -25,7 +26,7 @@ class MyApp extends StatelessWidget {
           scaffoldMessengerKey: scaffoldMessengerKey,
           // routes: AppRoutes.routes,
           // initialRoute: AppRoutes.splashScreen,
-          home: VideoExport(),
+          home: VideoCaption(),
         );
       },
     );

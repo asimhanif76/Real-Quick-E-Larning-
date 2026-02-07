@@ -277,6 +277,8 @@ class VideoExport extends StatelessWidget {
                                                   controller.selectedEmails
                                                           .contains(index)
                                                       ? AppImages.checkBox
+                                                      : index == 0
+                                                      ? AppImages.checkBox
                                                       : AppImages
                                                             .empty_Checkbox,
                                                 ),
