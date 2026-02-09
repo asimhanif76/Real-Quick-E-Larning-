@@ -1,19 +1,36 @@
+import 'package:e_learning/Controller/VideoCaption/video_caption_controller.dart';
 import 'package:e_learning/core/Extension/extension.dart';
 import 'package:e_learning/core/common/app_text.dart';
 import 'package:e_learning/core/common/utils/Themes/app_color.dart';
 import 'package:e_learning/core/common/utils/Themes/caption_text_field.dart';
 import 'package:e_learning/core/common/utils/app_images.dart';
-import 'package:e_learning/core/common/utils/text_field_custam.dart';
 import 'package:e_learning/core/common/widgets/custamContainer.dart';
 import 'package:e_learning/core/common/widgets/glass_container.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:get/get.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
 class VideoCaption extends StatelessWidget {
   VideoCaption({super.key});
 
+  VideoCaptionController controller = Get.put(VideoCaptionController());
+
   TextEditingController captionController = TextEditingController();
+
+  final List<Map<String, dynamic>> cards = [
+    {'title': 'None', 'color': Colors.grey},
+    {'title': 'New bold', 'color': Colors.blue, 'badge': true},
+    {'title': 'Add cap', 'color': Colors.red},
+    {'title': 'New bold', 'color': Colors.green},
+    {'title': 'Happy word', 'color': Colors.orange},
+    {'title': 'Add cap', 'color': Colors.red},
+    {'title': 'New bold', 'color': Colors.blue, 'badge': true},
+    {'title': 'Add cap', 'color': Colors.red},
+    {'title': 'New bold', 'color': Colors.green},
+    {'title': 'Happy word', 'color': Colors.orange},
+    {'title': 'Add cap', 'color': Colors.red},
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -86,11 +103,113 @@ class VideoCaption extends StatelessWidget {
                         ),
                         1.5.h.height,
                         CustomContainer(
+                          width: double.infinity,
+                          height: 6.h,
                           color: Colors.transparent,
                           borderCol: Colors.white70,
                           borders: true,
                           circular: 15,
-                          child: SizedBox(width: double.infinity, height: 5.h),
+                          child: ListView.separated(
+                            padding: EdgeInsets.symmetric(horizontal: 3.w),
+                            scrollDirection: Axis.horizontal,
+                            shrinkWrap: true,
+                            separatorBuilder: (context, index) => 3.w.width,
+                            itemCount: controller.fontList.length,
+                            itemBuilder: (context, index) {
+                              return InkWell(
+                                onTap: () {
+                                  controller.selectedFontStyle.value = index;
+                                },
+                                child: Obx(
+                                  () => Center(
+                                    child: Column(
+                                      children: [
+                                        1.5.h.height,
+                                        CustomTextWidget(
+                                          title: controller.fontList[index],
+                                          fontSize: 16,
+                                          color:
+                                              controller
+                                                      .selectedFontStyle
+                                                      .value ==
+                                                  index
+                                              ? AppColors.primaryColor
+                                              : AppColors.white,
+                                          fontWeight: FontWeight.w500,
+                                        ),
+                                        1.h.height, // optional spacing
+                                        Container(
+                                          height: 2, // thickness of the divider
+                                          width: 30, // optional width
+                                          color:
+                                              controller
+                                                      .selectedFontStyle
+                                                      .value ==
+                                                  index
+                                              ? AppColors.primaryColor
+                                              : Colors
+                                                    .transparent, // highlight selected
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                              );
+                            },
+                          ),
+                        ),
+                        1.5.h.height,
+                        Expanded(
+                          child: GridView.builder(
+                            itemCount: cards.length,
+                            gridDelegate:
+                                SliverGridDelegateWithFixedCrossAxisCount(
+                                  crossAxisCount: 3,
+                                  crossAxisSpacing: 35,
+                                  mainAxisSpacing: 15,
+                                  childAspectRatio: 1.2,
+                                ),
+                            itemBuilder: (context, index) {
+                              final item = cards[index];
+
+                              return InkWell(
+                                onTap: () {
+                                  print('Font Style Tapped');
+                                },
+                                child: Container(
+                                  decoration: BoxDecoration(
+                                    color: Colors.white,
+                                    borderRadius: BorderRadius.circular(14),
+                                  ),
+                                  child: Stack(
+                                    alignment: Alignment.center,
+                                    children: [
+                                      Text(
+                                        item['title'],
+                                        textAlign: TextAlign.center,
+                                        style: TextStyle(
+                                          color: item['color'],
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.w600,
+                                        ),
+                                      ),
+
+                                      /// 🔹 Diamond badge
+                                      if (item['badge'] == true)
+                                        Positioned(
+                                          bottom: 1.h,
+                                          right: 3.w,
+                                          child: SvgPicture.asset(
+                                            AppImages.diamond,
+                                            height: 2.h,
+                                          ),
+                                        ),
+                                    ],
+                                  ),
+                                ),
+                              );
+                            },
+                          ),
                         ),
                       ],
                     ),
