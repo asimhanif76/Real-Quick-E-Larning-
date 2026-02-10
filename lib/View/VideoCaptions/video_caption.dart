@@ -1,4 +1,5 @@
 import 'package:e_learning/Controller/VideoCaption/video_caption_controller.dart';
+import 'package:e_learning/View/VideoCaptions/edit_style.dart';
 import 'package:e_learning/core/Extension/extension.dart';
 import 'package:e_learning/core/common/app_text.dart';
 import 'package:e_learning/core/common/utils/Themes/app_color.dart';
@@ -15,8 +16,6 @@ class VideoCaption extends StatelessWidget {
   VideoCaption({super.key});
 
   VideoCaptionController controller = Get.put(VideoCaptionController());
-
-  TextEditingController captionController = TextEditingController();
 
   final List<Map<String, dynamic>> cards = [
     {'title': 'None', 'color': Colors.grey},
@@ -53,7 +52,7 @@ class VideoCaption extends StatelessWidget {
                     child: Column(
                       children: [
                         CaptionTextField(
-                          controller: captionController,
+                          controller: controller.captionController,
                           hintText: 'Write caption',
                           fontSize: 20,
                           textColor: AppColors.white,
@@ -66,6 +65,14 @@ class VideoCaption extends StatelessWidget {
                           children: [
                             SizedBox(),
                             CustomContainer(
+                              onTap: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => EditStyle(),
+                                  ),
+                                );
+                              },
                               circular: 3.w,
                               borderCol: Colors.white70,
                               borders: true,
@@ -104,7 +111,7 @@ class VideoCaption extends StatelessWidget {
                         1.5.h.height,
                         CustomContainer(
                           width: double.infinity,
-                          height: 6.h,
+                          height: 5.h,
                           color: Colors.transparent,
                           borderCol: Colors.white70,
                           borders: true,
@@ -124,7 +131,7 @@ class VideoCaption extends StatelessWidget {
                                   () => Center(
                                     child: Column(
                                       children: [
-                                        1.5.h.height,
+                                        0.8.h.height,
                                         CustomTextWidget(
                                           title: controller.fontList[index],
                                           fontSize: 16,
@@ -137,7 +144,7 @@ class VideoCaption extends StatelessWidget {
                                               : AppColors.white,
                                           fontWeight: FontWeight.w500,
                                         ),
-                                        1.h.height, // optional spacing
+                                        0.8.h.height, // optional spacing
                                         Container(
                                           height: 2, // thickness of the divider
                                           width: 30, // optional width
@@ -165,8 +172,8 @@ class VideoCaption extends StatelessWidget {
                             gridDelegate:
                                 SliverGridDelegateWithFixedCrossAxisCount(
                                   crossAxisCount: 3,
-                                  crossAxisSpacing: 35,
-                                  mainAxisSpacing: 15,
+                                  crossAxisSpacing: 10.w,
+                                  mainAxisSpacing: 2.h,
                                   childAspectRatio: 1.2,
                                 ),
                             itemBuilder: (context, index) {
