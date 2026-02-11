@@ -66,12 +66,12 @@ class VideoCaption extends StatelessWidget {
                             SizedBox(),
                             CustomContainer(
                               onTap: () {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) => EditStyle(),
-                                  ),
-                                );
+                                // Navigator.push(
+                                //   context,
+                                //   MaterialPageRoute(
+                                //     builder: (context) => EditStyle(),
+                                //   ),
+                                // );
                               },
                               circular: 3.w,
                               borderCol: Colors.white70,
