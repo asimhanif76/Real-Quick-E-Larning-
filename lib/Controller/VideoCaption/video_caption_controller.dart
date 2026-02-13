@@ -6,6 +6,8 @@ class VideoCaptionController extends GetxController {
 
   RxDouble textSize = 16.0.obs;
 
+  RxDouble opacity = 1.0.obs;
+
   RxInt selectedFontStyle = 1.obs;
   List<String> fontList = [
     'All',
@@ -16,4 +18,6 @@ class VideoCaptionController extends GetxController {
     'Impact',
     'Character',
   ];
+  List<String> textWeight = ['Light', 'Regular', 'Medium', 'Bold'];
+  RxString selectedWeight = 'Regular'.obs;
 }

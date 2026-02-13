@@ -24,9 +24,9 @@ class MyApp extends StatelessWidget {
           title: 'E-Learning',
           theme: AppThemes.lightTheme,
           scaffoldMessengerKey: scaffoldMessengerKey,
-          routes: AppRoutes.routes,
-          initialRoute: AppRoutes.splashScreen,
-          // home: VideoCaption(),
+          // routes: AppRoutes.routes,
+          // initialRoute: AppRoutes.splashScreen,
+          home: VideoCaption(),
         );
       },
     );
