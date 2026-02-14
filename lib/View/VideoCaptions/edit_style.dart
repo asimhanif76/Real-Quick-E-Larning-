@@ -1,10 +1,14 @@
 import 'package:e_learning/Controller/VideoCaption/video_caption_controller.dart';
+import 'package:e_learning/View/VideoCaptions/thumb_style.dart';
 import 'package:e_learning/core/Extension/extension.dart';
 import 'package:e_learning/core/common/app_text.dart';
 import 'package:e_learning/core/common/utils/Themes/app_color.dart';
+import 'package:e_learning/core/common/utils/app_images.dart';
 import 'package:e_learning/core/common/widgets/custamContainer.dart';
 import 'package:e_learning/core/common/widgets/glass_container.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_colorpicker/flutter_colorpicker.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:get/state_manager.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
@@ -27,6 +31,29 @@ class EditStyle extends StatelessWidget {
       default:
         return FontWeight.w400;
     }
+  }
+
+  void _openColorPicker(BuildContext context) {
+    showModalBottomSheet(
+      context: context,
+      backgroundColor: Colors.black,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+      ),
+      builder: (_) {
+        return Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: ColorPicker(
+            pickerColor: controller.selectedColor.value,
+            onColorChanged: (color) {
+              controller.selectedColor.value = color;
+            },
+            enableAlpha: true,
+            displayThumbColor: true,
+          ),
+        );
+      },
+    );
   }
 
   @override
@@ -61,7 +88,7 @@ class EditStyle extends StatelessWidget {
                       cursorColor: AppColors.primaryColor,
                       style: TextStyle(
                         fontSize: controller.textSize.value,
-                        color: AppColors.white.withOpacity(
+                        color: controller.selectedColor.value.withOpacity(
                           controller.opacity.value,
                         ),
                         fontWeight: _getFontWeight(
@@ -74,7 +101,7 @@ class EditStyle extends StatelessWidget {
                         hintText: 'Captions',
                         hintStyle: TextStyle(
                           fontSize: controller.textSize.value,
-                          color: AppColors.white.withOpacity(
+                          color: controller.selectedColor.value.withOpacity(
                             controller.opacity.value,
                           ),
                           fontWeight: _getFontWeight(
@@ -112,7 +139,7 @@ class EditStyle extends StatelessWidget {
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  5.h.height,
+                                  1.h.height,
                                   Row(
                                     mainAxisAlignment:
                                         MainAxisAlignment.spaceBetween,
@@ -122,12 +149,10 @@ class EditStyle extends StatelessWidget {
                                         fontSize: 18,
                                         color: AppColors.white,
                                       ),
-                                      IconButton(
-                                        onPressed: () => Navigator.pop(context),
-                                        icon: Icon(
-                                          Icons.cancel,
-                                          size: 7.w,
-                                          color: Colors.white,
+                                      InkWell(
+                                        onTap: () => Navigator.pop(context),
+                                        child: SvgPicture.asset(
+                                          AppImages.circle_cross,
                                         ),
                                       ),
                                     ],
@@ -186,7 +211,7 @@ class EditStyle extends StatelessWidget {
                                     ),
                                   ),
 
-                                  2.h.height,
+                                  1.5.h.height,
                                   CustomTextWidget(
                                     title: 'Size',
                                     fontSize: 18,
@@ -226,7 +251,7 @@ class EditStyle extends StatelessWidget {
                                           controller.textSize.value = value,
                                     ),
                                   ),
-                                  2.h.height,
+                                  1.5.h.height,
                                   CustomTextWidget(
                                     title: 'Opacity',
                                     fontSize: 18,
@@ -269,17 +294,129 @@ class EditStyle extends StatelessWidget {
                                         fontSize: 18,
                                         color: AppColors.white,
                                       ),
-                                      IconButton(
-                                        onPressed: () => Navigator.pop(context),
-                                        icon: Icon(
-                                          Icons.cancel,
-                                          size: 7.w,
-                                          color: Colors.white,
+                                      InkWell(
+                                        onTap: () {
+                                          controller.setColor(Colors.yellow);
+                                        },
+
+                                        child: SvgPicture.asset(
+                                          AppImages.select_color,
                                         ),
                                       ),
                                     ],
                                   ),
-                                  2.h.height,
+                                  0.5.h.height,
+                                  Obx(
+                                    () => CustomContainer(
+                                      height: 6.h,
+                                      width: double.infinity,
+                                      circular: 3.w,
+                                      color: controller.selectedColor.value,
+                                    ),
+                                  ),
+                                  // Padding(
+                                  //   padding: const EdgeInsets.all(16.0),
+                                  //   child: ColorPicker(
+                                  //     pickerColor:
+                                  //         controller.selectedColor.value,
+                                  //     onColorChanged: (color) {
+                                  //       controller.selectedColor.value = color;
+                                  //     },
+                                  //     enableAlpha: true,
+                                  //     displayThumbColor: true,
+                                  //   ),
+                                  // ),
+                                  // Obx(
+                                  //   () => CustomContainer(
+                                  //     height: 8.h,
+                                  //     width: double.infinity,
+                                  //     circular: 4.w,
+                                  //     color: controller.selectedColor.value,
+                                  //   ),
+                                  // ),
+                                  // 1.h.height,
+
+                                  /// 🌈 Rainbow Slider Line
+                                  // Obx(
+                                  //   () => SliderTheme(
+                                  //     data: SliderTheme.of(context).copyWith(
+                                  //       trackHeight: 8,
+                                  //       thumbShape: RoundSliderThumbShape(
+                                  //         enabledThumbRadius: 10,
+                                  //       ),
+                                  //       overlayShape: RoundSliderOverlayShape(
+                                  //         overlayRadius: 18,
+                                  //       ),
+                                  //       thumbColor: Colors.white,
+                                  //       activeTrackColor: Colors.transparent,
+                                  //       inactiveTrackColor: Colors.transparent,
+                                  //       trackShape:
+                                  //           const RectangularSliderTrackShape(),
+                                  //     ),
+                                  //     child: Slider(
+                                  //       min: 0,
+                                  //       max: 1,
+                                  //       value: controller.hueValue.value,
+                                  //       onChanged: (value) {
+                                  //         controller.updateColor(value);
+                                  //       },
+                                  //     ),
+                                  //   ),
+                                  // ),
+
+                                  /// 🌈 Gradient Background Under Slider
+                                  1.h.height,
+                                  Stack(
+                                    alignment: Alignment.center,
+                                    children: [
+                                      Container(
+                                        height: 1.8.h,
+                                        decoration: BoxDecoration(
+                                          borderRadius: BorderRadius.circular(
+                                            20,
+                                          ),
+                                          gradient: LinearGradient(
+                                            colors: const [
+                                              Colors.red,
+                                              Colors.orange,
+                                              Colors.yellow,
+                                              Colors.green,
+                                              Colors.cyan,
+                                              Colors.blue,
+                                              Colors.purple,
+                                              Colors.red,
+                                            ],
+                                          ),
+                                        ),
+                                      ),
+                                      Obx(
+                                        () => SliderTheme(
+                                          data: SliderTheme.of(context)
+                                              .copyWith(
+                                                trackHeight: 0.6.h,
+                                                thumbShape: TransparentThumb(
+                                                  thumbRadius: 8,
+                                                ), // smaller size
+                                                overlayShape:
+                                                    SliderComponentShape
+                                                        .noOverlay,
+                                                activeTrackColor:
+                                                    Colors.transparent,
+                                                inactiveTrackColor:
+                                                    Colors.transparent,
+                                              ),
+                                          child: Slider(
+                                            min: 0,
+                                            max: 1,
+                                            value: controller.hueValue.value,
+                                            onChanged: (value) {
+                                              controller.updateColor(value);
+                                            },
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
                                 ],
                               ),
                             ),

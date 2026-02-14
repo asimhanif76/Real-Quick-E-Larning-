@@ -49,6 +49,8 @@ class AppImages {
   static String checkBox = '${imagesPath}checkBox.svg';
   static String empty_Checkbox = '${imagesPath}empty_Checkbox.svg';
   static String tick = '${imagesPath}tick.svg';
+  static String select_color = '${imagesPath}select_color.svg';
+  static String circle_cross = '${imagesPath}circle_cross.svg';
   // static String gptRebout = '${imagesPath}gptRebout.png';
   // static String healthBar = '${imagesPath}healthBar.png';
   // static String vagitable = '${imagesPath}vagitable.png';

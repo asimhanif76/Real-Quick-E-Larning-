@@ -1,10 +1,17 @@
+import 'package:e_learning/Controller/VideoCaption/video_caption_controller.dart';
 import 'package:e_learning/core/common/utils/Themes/app_color.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:get/get.dart';
+import 'package:get/utils.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
 class CaptionTextField extends StatelessWidget {
   final TextEditingController? controller;
+
+  VideoCaptionController videoCaptionController = Get.put(
+    VideoCaptionController(),
+  );
 
   /// text related
   final String hintText;
@@ -18,7 +25,7 @@ class CaptionTextField extends StatelessWidget {
   final double? suffixIconHeight;
   final VoidCallback? onSuffixTap;
 
-  const CaptionTextField({
+  CaptionTextField({
     super.key,
     this.controller,
     required this.hintText,
@@ -31,6 +38,21 @@ class CaptionTextField extends StatelessWidget {
     this.onSuffixTap,
   });
 
+  FontWeight _getFontWeight(String weight) {
+    switch (weight) {
+      case 'Light':
+        return FontWeight.w300;
+      case 'Regular':
+        return FontWeight.w400;
+      case 'Medium':
+        return FontWeight.w500;
+      case 'Bold':
+        return FontWeight.w700;
+      default:
+        return FontWeight.w400;
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return TextField(
@@ -38,10 +60,11 @@ class CaptionTextField extends StatelessWidget {
       maxLines: maxLines ?? 1,
       cursorColor: AppColors.primaryColor,
       style: TextStyle(
-        color: textColor,
-        fontSize: fontSize,
-        fontFamily: 'nunito',
-        fontWeight: FontWeight.w500,
+        fontSize: videoCaptionController.textSize.value,
+        color: videoCaptionController.selectedColor.value.withOpacity(
+          videoCaptionController.opacity.value,
+        ),
+        fontWeight: _getFontWeight(videoCaptionController.selectedWeight.value),
       ),
       decoration: InputDecoration(
         enabledBorder: OutlineInputBorder(

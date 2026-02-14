@@ -2,10 +2,30 @@ import 'package:flutter/material.dart';
 
 import 'app_color.dart';
 
+// MaterialColor _createMaterialColor(Color color) {
+//   final List<Color> strengths = <Color>[];
+//   final int r = color.red, g = color.green, b = color.blue;
+
+//   for (int i = 1; i < 10; i++) {
+//     final double ds = 0.5 + (i / 10);
+//     strengths.add(Color.fromARGB(
+//       (0.25 * 255).round(),
+//       (r + ((255 - r) * ds)).round(),
+//       (g + ((255 - g) * ds)).round(),
+//       (b + ((255 - b) * ds)).round(),
+//     ));
+//   }
+//   return MaterialColor(color.value, <int, Color>{
+//     for (int index = 0; index < strengths.length; index++)
+//       ((10 - (index + 1)) * 100): strengths[index],
+//   });
+// }
+
 class AppThemes {
   static ThemeData lightTheme = ThemeData(
     brightness: Brightness.light,
     primaryColor: AppColors.primaryColor,
+    // primarySwatch: _createMaterialColor(AppColors.primaryColor),
     scaffoldBackgroundColor: AppColors.backgroundColor,
     useMaterial3: true,
 
@@ -73,13 +93,25 @@ class AppThemes {
 
     // Text Theme (Typography)
     textTheme: const TextTheme(
-      displayLarge: TextStyle(fontSize: 32, fontWeight: FontWeight.bold, color: AppColors.black),
-      titleLarge: TextStyle(fontSize: 22, fontWeight: FontWeight.w600, color: AppColors.black),
+      displayLarge: TextStyle(
+        fontSize: 32,
+        fontWeight: FontWeight.bold,
+        color: AppColors.black,
+      ),
+      titleLarge: TextStyle(
+        fontSize: 22,
+        fontWeight: FontWeight.w600,
+        color: AppColors.black,
+      ),
       bodyLarge: TextStyle(fontSize: 16, color: AppColors.offBlack),
       bodyMedium: TextStyle(fontSize: 14, color: AppColors.offblack),
-      labelLarge: TextStyle(fontSize: 14, fontWeight: FontWeight.w500, color: AppColors.gray),
+      labelLarge: TextStyle(
+        fontSize: 14,
+        fontWeight: FontWeight.w500,
+        color: AppColors.gray,
+      ),
     ),
 
-    iconTheme:  IconThemeData(color: AppColors.black),
+    iconTheme: IconThemeData(color: AppColors.black),
   );
 }
