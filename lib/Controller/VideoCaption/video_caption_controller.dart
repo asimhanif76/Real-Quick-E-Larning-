@@ -1,3 +1,4 @@
+import 'package:e_learning/core/common/utils/Themes/app_color.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:get/state_manager.dart';
@@ -18,6 +19,20 @@ class VideoCaptionController extends GetxController {
 
     final hsv = HSVColor.fromColor(color);
     hueValue.value = hsv.hue / 360;
+  }
+
+  void resetStyle() {
+    // Reset font weight
+    selectedWeight.value = 'Regular';
+
+    // Reset text size
+    textSize.value = 16.0;
+
+    // Reset opacity
+    opacity.value = 1.0;
+
+    // Reset color (default yellow)
+    setColor(AppColors.primaryColor);
   }
 
   TextEditingController captionController = TextEditingController();

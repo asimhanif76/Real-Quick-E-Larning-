@@ -5,6 +5,7 @@ import 'package:e_learning/core/common/app_text.dart';
 import 'package:e_learning/core/common/utils/Themes/app_color.dart';
 import 'package:e_learning/core/common/utils/app_images.dart';
 import 'package:e_learning/core/common/widgets/custamContainer.dart';
+import 'package:e_learning/core/common/widgets/custom_Button.dart';
 import 'package:e_learning/core/common/widgets/glass_container.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_colorpicker/flutter_colorpicker.dart';
@@ -73,7 +74,9 @@ class EditStyle extends StatelessWidget {
                   textSelectionTheme: TextSelectionThemeData(
                     cursorColor: AppColors.primaryColor,
                     selectionColor: AppColors.primaryColor.withOpacity(0.3),
-                    selectionHandleColor: AppColors.primaryColor,
+                    selectionHandleColor: AppColors.primaryColor.withOpacity(
+                      0.7,
+                    ),
                   ),
                 ),
                 child: Obx(
@@ -133,7 +136,7 @@ class EditStyle extends StatelessWidget {
                         context: context,
                         builder: (context) {
                           return GlassContainer(
-                            color: Colors.black,
+                            // color: Colors.black,
                             child: Padding(
                               padding: EdgeInsets.symmetric(horizontal: 6.w),
                               child: Column(
@@ -277,7 +280,7 @@ class EditStyle extends StatelessWidget {
                                   Obx(
                                     () => _customSlider(
                                       context: context,
-                                      minValue: 0,
+                                      minValue: 0.4,
                                       maxValue: 1,
                                       value: controller.opacity.value,
                                       onChanged: (value) =>
@@ -296,7 +299,9 @@ class EditStyle extends StatelessWidget {
                                       ),
                                       InkWell(
                                         onTap: () {
-                                          controller.setColor(Colors.yellow);
+                                          controller.setColor(
+                                            AppColors.primaryColor,
+                                          );
                                         },
 
                                         child: SvgPicture.asset(
@@ -305,7 +310,7 @@ class EditStyle extends StatelessWidget {
                                       ),
                                     ],
                                   ),
-                                  0.5.h.height,
+                                  1.5.h.height,
                                   Obx(
                                     () => CustomContainer(
                                       height: 6.h,
@@ -314,6 +319,7 @@ class EditStyle extends StatelessWidget {
                                       color: controller.selectedColor.value,
                                     ),
                                   ),
+
                                   // Padding(
                                   //   padding: const EdgeInsets.all(16.0),
                                   //   child: ColorPicker(
@@ -365,7 +371,7 @@ class EditStyle extends StatelessWidget {
                                   // ),
 
                                   /// 🌈 Gradient Background Under Slider
-                                  1.h.height,
+                                  2.h.height,
                                   Stack(
                                     alignment: Alignment.center,
                                     children: [
@@ -417,6 +423,34 @@ class EditStyle extends StatelessWidget {
                                       ),
                                     ],
                                   ),
+                                  2.h.height,
+                                  Row(
+                                    children: [
+                                      Expanded(
+                                        flex: 2,
+                                        child: MainCustomButton(
+                                          backColour: Colors.transparent,
+                                          borderCol: AppColors.white,
+                                          title: 'Reset Filter',
+                                          onTap: () {
+                                            controller.resetStyle();
+                                          },
+                                        ),
+                                      ),
+                                      2.w.width,
+                                      Expanded(
+                                        flex: 3,
+                                        child: MainCustomButton(
+                                          backColour: AppColors.primaryColor,
+                                          // borderCol: AppColors.white,
+                                          title: 'Apply',
+                                          onTap: () {
+                                            Navigator.pop(context);
+                                          },
+                                        ),
+                                      ),
+                                    ],
+                                  ),
                                 ],
                               ),
                             ),
@@ -459,7 +493,7 @@ class EditStyle extends StatelessWidget {
     required ValueChanged onChanged,
   }) {
     return Container(
-      height: 1.5.h,
+      height: 1.7.h,
       padding: EdgeInsets.zero,
       decoration: BoxDecoration(
         border: Border.all(color: Colors.white, width: 1.5),
@@ -470,7 +504,7 @@ class EditStyle extends StatelessWidget {
           trackHeight: 1.h,
           padding: EdgeInsets.all(0),
           activeTrackColor: AppColors.primaryColor,
-          inactiveTrackColor: Colors.black,
+          inactiveTrackColor: Colors.transparent,
 
           thumbColor: AppColors.primaryColor.withOpacity(0.8),
           overlayColor: Colors.transparent,
