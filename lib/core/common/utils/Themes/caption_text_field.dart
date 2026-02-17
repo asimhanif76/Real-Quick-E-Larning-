@@ -21,6 +21,7 @@ class CaptionTextField extends StatelessWidget {
 
   /// suffix icon related
   final String? suffixIcon;
+  final String? prefixIcon;
   final double? suffixIconWidth;
   final double? suffixIconHeight;
   final VoidCallback? onSuffixTap;
@@ -33,6 +34,7 @@ class CaptionTextField extends StatelessWidget {
     this.maxLines,
     this.textColor,
     this.suffixIcon,
+    this.prefixIcon,
     this.suffixIconWidth,
     this.suffixIconHeight,
     this.onSuffixTap,
@@ -96,6 +98,19 @@ class CaptionTextField extends StatelessWidget {
           ),
 
           /// suffix icon (optional)
+          prefixIcon: prefixIcon == null
+              ? null
+              : SizedBox(
+                  width: 8.w,
+                  child: Center(
+                    child: SvgPicture.asset(
+                      prefixIcon!,
+                      width: 3.w,
+                      height: 2.h,
+                    ),
+                  ),
+                ),
+
           suffixIcon: suffixIcon == null
               ? null
               : InkWell(

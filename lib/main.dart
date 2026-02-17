@@ -1,4 +1,5 @@
 import 'package:e_learning/Routes/app_routes.dart';
+import 'package:e_learning/View/Text%20to%20Speach/text_to_speach.dart';
 import 'package:e_learning/View/VideoCaptions/video_caption.dart';
 import 'package:e_learning/View/VideoExport/video_export.dart';
 import 'package:e_learning/core/common/app_keys.dart';
@@ -19,14 +20,14 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return ResponsiveSizer(
       builder: (context, orientation, screenType) {
-        return MaterialApp(
+        return GetMaterialApp(
           debugShowCheckedModeBanner: false,
           title: 'E-Learning',
           theme: AppThemes.lightTheme,
           scaffoldMessengerKey: scaffoldMessengerKey,
           // routes: AppRoutes.routes,
           // initialRoute: AppRoutes.splashScreen,
-          home: VideoCaption(),
+          home: TextToSpeach(),
         );
       },
     );

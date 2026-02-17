@@ -51,6 +51,10 @@ class AppImages {
   static String tick = '${imagesPath}tick.svg';
   static String select_color = '${imagesPath}select_color.svg';
   static String circle_cross = '${imagesPath}circle_cross.svg';
+  static String verticalDivider = '${imagesPath}verticalDivider.svg';
+  static String voiceFilter = '${imagesPath}voiceFilter.svg';
+  static String searchIcon = '${imagesPath}searchIcon.svg';
+  // static String imagegirl = '${imagesPath}imagegirl.jpg';
   // static String gptRebout = '${imagesPath}gptRebout.png';
   // static String healthBar = '${imagesPath}healthBar.png';
   // static String vagitable = '${imagesPath}vagitable.png';

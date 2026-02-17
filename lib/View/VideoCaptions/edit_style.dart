@@ -8,7 +8,6 @@ import 'package:e_learning/core/common/widgets/custamContainer.dart';
 import 'package:e_learning/core/common/widgets/custom_Button.dart';
 import 'package:e_learning/core/common/widgets/glass_container.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_colorpicker/flutter_colorpicker.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:get/state_manager.dart';
@@ -32,29 +31,6 @@ class EditStyle extends StatelessWidget {
       default:
         return FontWeight.w400;
     }
-  }
-
-  void _openColorPicker(BuildContext context) {
-    showModalBottomSheet(
-      context: context,
-      backgroundColor: Colors.black,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
-      ),
-      builder: (_) {
-        return Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: ColorPicker(
-            pickerColor: controller.selectedColor.value,
-            onColorChanged: (color) {
-              controller.selectedColor.value = color;
-            },
-            enableAlpha: true,
-            displayThumbColor: true,
-          ),
-        );
-      },
-    );
   }
 
   @override
@@ -319,58 +295,6 @@ class EditStyle extends StatelessWidget {
                                       color: controller.selectedColor.value,
                                     ),
                                   ),
-
-                                  // Padding(
-                                  //   padding: const EdgeInsets.all(16.0),
-                                  //   child: ColorPicker(
-                                  //     pickerColor:
-                                  //         controller.selectedColor.value,
-                                  //     onColorChanged: (color) {
-                                  //       controller.selectedColor.value = color;
-                                  //     },
-                                  //     enableAlpha: true,
-                                  //     displayThumbColor: true,
-                                  //   ),
-                                  // ),
-                                  // Obx(
-                                  //   () => CustomContainer(
-                                  //     height: 8.h,
-                                  //     width: double.infinity,
-                                  //     circular: 4.w,
-                                  //     color: controller.selectedColor.value,
-                                  //   ),
-                                  // ),
-                                  // 1.h.height,
-
-                                  /// 🌈 Rainbow Slider Line
-                                  // Obx(
-                                  //   () => SliderTheme(
-                                  //     data: SliderTheme.of(context).copyWith(
-                                  //       trackHeight: 8,
-                                  //       thumbShape: RoundSliderThumbShape(
-                                  //         enabledThumbRadius: 10,
-                                  //       ),
-                                  //       overlayShape: RoundSliderOverlayShape(
-                                  //         overlayRadius: 18,
-                                  //       ),
-                                  //       thumbColor: Colors.white,
-                                  //       activeTrackColor: Colors.transparent,
-                                  //       inactiveTrackColor: Colors.transparent,
-                                  //       trackShape:
-                                  //           const RectangularSliderTrackShape(),
-                                  //     ),
-                                  //     child: Slider(
-                                  //       min: 0,
-                                  //       max: 1,
-                                  //       value: controller.hueValue.value,
-                                  //       onChanged: (value) {
-                                  //         controller.updateColor(value);
-                                  //       },
-                                  //     ),
-                                  //   ),
-                                  // ),
-
-                                  /// 🌈 Gradient Background Under Slider
                                   2.h.height,
                                   Stack(
                                     alignment: Alignment.center,
